@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 const {
   getLeads,
@@ -7,23 +7,27 @@ const {
   createLead,
   updateLead,
   deleteLead,
-} = require('../controllers/leadController');
+} = require('../controllers/leadController')
 
-const { validateLead } = require('../validators/leadValidator');
+const { validateLead } = require('../validators/leadValidator')
+const protect = require('../middleware/authMiddleware')
+
+// All lead routes require login
+router.use(protect)
 
 // Get all leads
-router.get('/', getLeads);
+router.get('/', getLeads)
 
 // Get a single lead
-router.get('/:id', getLeadById);
+router.get('/:id', getLeadById)
 
 // Create a lead
-router.post('/', validateLead, createLead);
+router.post('/', validateLead, createLead)
 
 // Update a lead
-router.put('/:id', validateLead, updateLead);
+router.put('/:id', validateLead, updateLead)
 
 // Delete a lead
-router.delete('/:id', deleteLead);
+router.delete('/:id', deleteLead)
 
-module.exports = router;
+module.exports = router

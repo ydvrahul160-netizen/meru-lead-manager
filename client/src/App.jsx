@@ -5,32 +5,50 @@ import {
   Navigate,
 } from 'react-router-dom'
 
+import { AuthProvider } from './context/AuthContext'
+
 import MainLayout from './components/layout/MainLayout'
+import ProtectedRoute from './components/ProtectedRoute'
+
 import Dashboard from './pages/Dashboard'
 import Leads from './pages/Leads'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route
-            path="/"
-            element={<Navigate to="/dashboard" replace />}
-          />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<MainLayout />}>
+              <Route
+                path="/"
+                element={<Navigate to="/dashboard" replace />}
+              />
 
-          <Route
-            path="/leads"
-            element={<Leads />}
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+              <Route
+                path="/dashboard"
+                element={<Dashboard />}
+              />
+
+              <Route
+                path="/leads"
+                element={<Leads />}
+              />
+            </Route>
+          </Route>
+
+          {/* Invalid Routes */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 

@@ -4,6 +4,8 @@ require('dotenv').config();
 
 const connectDB = require('./config/db');
 const leadRoutes = require('./routes/leadRoutes');
+const authRoutes = require('./routes/authRoutes');
+
 const notFoundMiddleware = require('./middleware/notFoundMiddleware');
 const errorMiddleware = require('./middleware/errorMiddleware');
 
@@ -26,6 +28,7 @@ app.get('/', (req, res) => {
 
 // Lead routes
 app.use('/api/leads', leadRoutes);
+app.use('/api/auth', authRoutes);
 
 // Error handling
 app.use(notFoundMiddleware);

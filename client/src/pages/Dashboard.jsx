@@ -116,14 +116,14 @@ function Dashboard() {
       </div>
 
       {/* Statistics */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-5">
         {stats.map((stat) => {
           const Icon = stat.icon
 
           return (
             <div
               key={stat.title}
-              className="rounded-xl border border-slate-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-md"
+              className="min-w-0 rounded-xl border border-slate-200 bg-white p-3 transition hover:-translate-y-1 hover:shadow-md sm:p-5"
             >
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-slate-500">
@@ -135,7 +135,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <h2 className="mt-4 text-3xl font-bold text-slate-900">
+              <h2 className="mt-3 text-2xl font-bold text-slate-900 sm:mt-4 sm:text-3xl">
                 {stat.value}
               </h2>
             </div>
